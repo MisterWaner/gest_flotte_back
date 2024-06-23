@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import { config } from "dotenv";
 import cors from "cors";
+import { createDb } from "./data/dbCreation.js";
 
 config();
 
@@ -24,5 +25,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.listen(port, () => {
+    createDb();
     console.log(`Server is running on port ${port}`);
 })

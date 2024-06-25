@@ -40,12 +40,12 @@ export const createDb = async () => {
             type VARCHAR(100) NOT NULL
         )`);
 
-        await connection.query(`CREATE TABLE IF NOT EXISTS userProduct(
+        await connection.query(`CREATE TABLE IF NOT EXISTS companyProduct(
             id INTEGER PRIMARY KEY AUTO_INCREMENT,
-            userId INTEGER NOT NULL,
+            companyId INTEGER NOT NULL,
             productId INTEGER NOT NULL,
             quantity INTEGER NOT NULL,
-            FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE,
             FOREIGN KEY (productId) REFERENCES product(id) ON DELETE CASCADE ON UPDATE CASCADE
         )`);
 
@@ -59,9 +59,9 @@ export const createDb = async () => {
             number VARCHAR(25) NOT NULL,
             owner VARCHAR(100) NOT NULL,
             productId INTEGER NOT NULL,
-            userId INTEGER NOT NULL,
+            companyId INTEGER NOT NULL,
             FOREIGN KEY (productId) REFERENCES product(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE
         )`);
 
         await connection.query(`CREATE TABLE IF NOT EXISTS computer(
@@ -71,9 +71,9 @@ export const createDb = async () => {
             price INTEGER(3) NOT NULL,
             owner VARCHAR(100) NOT NULL,
             productId INTEGER NOT NULL,
-            userId INTEGER NOT NULL,
+            companyId INTEGER NOT NULL,
             FOREIGN KEY (productId) REFERENCES product(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE
         )`);
 
         await connection.query(`CREATE TABLE IF NOT EXISTS car(
@@ -86,9 +86,9 @@ export const createDb = async () => {
             driver VARCHAR(100) NOT NULL,
             price INTEGER(6) NOT NULL,
             productId INTEGER NOT NULL,
-            userId INTEGER NOT NULL,
+            companyId INTEGER NOT NULL,
             FOREIGN KEY (productId) REFERENCES product(id) ON DELETE CASCADE ON UPDATE CASCADE,
-            FOREIGN KEY (userId) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE
+            FOREIGN KEY (companyId) REFERENCES company(id) ON DELETE CASCADE ON UPDATE CASCADE
         )`);
     } catch (error) {
         console.log(error);

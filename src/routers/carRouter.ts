@@ -5,8 +5,8 @@ const carController = new CarController();
 
 export const carRouter = Router();
 
-carRouter.post("/car", carController.createCar);
-carRouter.get("/car", carController.getAllCars);
-carRouter.get("/car/:id", carController.getCarById);
-carRouter.put("/car/:id", carController.updateCar);
-carRouter.delete("/car/:id", carController.deleteCar);
+carRouter.post("/", carController.createCar);
+carRouter.get("/", carController.getAllCars);
+carRouter.get("/:id", carController.getCarById);
+carRouter.put("/:id", carController.updateCar);
+carRouter.delete("/:id", carController.deleteCar);

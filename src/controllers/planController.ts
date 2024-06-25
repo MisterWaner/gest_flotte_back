@@ -32,7 +32,7 @@ export class PlanController {
     async getAllPlans(req: Request, res: Response) {
         try {
             const plans = await findAll("plan");
-            res.send("coucou")
+
             return res.status(200).json({
                 plans,
             });

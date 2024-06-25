@@ -5,9 +5,9 @@ export const productRouter = Router();
 
 const productController = new ProductController();
 
-productRouter.post("/product", productController.createProduct);
-productRouter.get("/product", productController.getAllProducts);
-productRouter.get("/product/:id", productController.getProductById);
-productRouter.put("/product/:id", productController.updateProduct);
-productRouter.delete("/product/:id", productController.deleteProduct);
+productRouter.post("/", productController.createProduct);
+productRouter.get("/", productController.getAllProducts);
+productRouter.get("/:id", productController.getProductById);
+productRouter.put("/:id", productController.updateProduct);
+productRouter.delete("/:id", productController.deleteProduct);
 

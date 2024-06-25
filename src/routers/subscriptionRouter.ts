@@ -5,8 +5,8 @@ const subscriptionController = new SubscriptionController();
 
 export const subscriptionRouter = Router();
 
-subscriptionRouter.post("/subscription", subscriptionController.createSubscription);
-subscriptionRouter.get("/subscription", subscriptionController.getAllSubscriptions);
-subscriptionRouter.get("/subscription/:id", subscriptionController.getSubscriptionById);
-subscriptionRouter.put("/subscription/:id", subscriptionController.updateSubscription);
-subscriptionRouter.delete("/subscription/:id", subscriptionController.deleteSubscription);
+subscriptionRouter.post("/", subscriptionController.createSubscription);
+subscriptionRouter.get("/", subscriptionController.getAllSubscriptions);
+subscriptionRouter.get("/:id", subscriptionController.getSubscriptionById);
+subscriptionRouter.put("/:id", subscriptionController.updateSubscription);
+subscriptionRouter.delete("/:id", subscriptionController.deleteSubscription);

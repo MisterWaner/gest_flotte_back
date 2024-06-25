@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { config } from "dotenv";
 import cors from "cors";
 import { createDb } from "./data/dbCreation.js";
+import { router } from "./routers/index.js";
 config();
 
 const app = express();
@@ -22,6 +23,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req: Request, res: Response) => {
     res.send("API démarée et fonctionnelle");
 });
+
+app.get("/api", router);
 
 app.listen(port, () => {
     createDb();

@@ -1,4 +1,4 @@
-export type CompanyProduct = {
+export type Subscription = {
     id: number,
     companyId: number,	
     productId: number,

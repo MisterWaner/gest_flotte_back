@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Plan } from "../types/Plan.js";
+import { Product } from "../types/Product.js";
 import {
     insert,
     findAll,
@@ -8,90 +8,89 @@ import {
     updateOne,
 } from "../utils/queries.js";
 
-export class PlanController {
-    async createPlan(req: Request, res: Response) {
+export class ProductController {
+    async createProduct(req: Request, res: Response) {
         try {
-            const { title, description, price }: Plan = req.body;
+            const { type }: Product = req.body;
 
-            if (!title || !description || !price) {
+            if (!type) {
                 return res.status(400).json({
                     message: "Missing required fields",
                 });
             }
 
-            const plan = await insert("plan", { title, description, price });
+            const product = await insert("product", { type });
             return res.status(201).json({
-                plan,
-                message: "Plan created successfully",
+                product,
+                message: "Product created successfully",
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async getAllPlans(req: Request, res: Response) {
+    async getAllProducts(req: Request, res: Response) {
         try {
-            const plans = await findAll("plan");
-            res.send("coucou")
+            const products = await findAll("product");
             return res.status(200).json({
-                plans,
+                products,
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async getPlanById(req: Request, res: Response) {
+    async getProductById(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const numberId = Number(id);
-            const plan = await findOne("plan", numberId);
+            const product = await findOne("product", numberId);
 
-            if (!plan) {
+            if (!product) {
                 return res.status(404).json({
-                    message: "Plan not found",
+                    message: "Product not found",
                 });
             }
 
             return res.status(200).json({
-                plan,
+                product,
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async updatePlan(req: Request, res: Response) {
+    async updateProduct(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const numberId = Number(id);
 
-            const { title, description, price }: Plan = req.body;
+            const { type }: Product = req.body;
 
-            if (!title || !description || !price) {
+            if (!type) {
                 return res.status(400).json({
                     message: "Missing required fields",
                 });
             }
 
-            const plan = await updateOne("plan", numberId, { title, description, price });
+            const product = await updateOne("product", numberId, { type });
             return res.status(200).json({
-                plan,
-                message: "Plan updated successfully",
+                product,
+                message: "Product updated successfully",
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async deletePlan(req: Request, res: Response) {
+    async deleteProduct(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const numberId = Number(id);
-            const plan = await deleteOne("plan", numberId);
+            const product = await deleteOne("product", numberId);
             return res.status(200).json({
-                plan,
-                message: "Plan deleted successfully",
+                product,
+                message: "Product deleted successfully",
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });

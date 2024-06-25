@@ -40,7 +40,7 @@ export const createDb = async () => {
             type VARCHAR(100) NOT NULL
         )`);
 
-        await connection.query(`CREATE TABLE IF NOT EXISTS companyProduct(
+        await connection.query(`CREATE TABLE IF NOT EXISTS subscription(
             id INTEGER PRIMARY KEY AUTO_INCREMENT,
             companyId INTEGER NOT NULL,
             productId INTEGER NOT NULL,

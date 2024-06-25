@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Plan } from "../types/Plan.js";
+import { Subscription } from "../types/Subscription.js";
 import {
     insert,
     findAll,
@@ -8,90 +8,88 @@ import {
     updateOne,
 } from "../utils/queries.js";
 
-export class PlanController {
-    async createPlan(req: Request, res: Response) {
+export class SubscriptionController {
+    async createSubscription(req: Request, res: Response) {
         try {
-            const { title, description, price }: Plan = req.body;
+            const { companyId, productId, quantity }: Subscription = req.body;
 
-            if (!title || !description || !price) {
+            if (!companyId || !productId || !quantity) {
                 return res.status(400).json({
                     message: "Missing required fields",
                 });
             }
 
-            const plan = await insert("plan", { title, description, price });
+            const subscription = await insert("subscription", { companyId, productId, quantity });
             return res.status(201).json({
-                plan,
-                message: "Plan created successfully",
+                subscription,
+                message: "Subscription created successfully",
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async getAllPlans(req: Request, res: Response) {
+    async getAllSubscriptions(req: Request, res: Response) {
         try {
-            const plans = await findAll("plan");
-            res.send("coucou")
+            const subscriptions = await findAll("subscription");
             return res.status(200).json({
-                plans,
+                subscriptions,
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async getPlanById(req: Request, res: Response) {
+    async getSubscriptionById(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const numberId = Number(id);
-            const plan = await findOne("plan", numberId);
+            const subscription = await findOne("subscription", numberId);
 
-            if (!plan) {
+            if (!subscription) {
                 return res.status(404).json({
-                    message: "Plan not found",
+                    message: "Subscription not found",
                 });
             }
 
             return res.status(200).json({
-                plan,
+                subscription,
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
-
-    async updatePlan(req: Request, res: Response) {
+    async updateSubscription(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const numberId = Number(id);
 
-            const { title, description, price }: Plan = req.body;
+            const { companyId, productId, quantity }: Subscription = req.body;
 
-            if (!title || !description || !price) {
+            if (!companyId || !productId || !quantity) {
                 return res.status(400).json({
                     message: "Missing required fields",
                 });
             }
 
-            const plan = await updateOne("plan", numberId, { title, description, price });
+            const subscription = await updateOne("subscription", numberId, { companyId, productId, quantity });
             return res.status(200).json({
-                plan,
-                message: "Plan updated successfully",
+                subscription,
+                message: "Subscription updated successfully",
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
         }
     }
 
-    async deletePlan(req: Request, res: Response) {
+    async deleteSubscription(req: Request, res: Response) {
         try {
             const { id } = req.params;
             const numberId = Number(id);
-            const plan = await deleteOne("plan", numberId);
+            const subscription = await deleteOne("subscription", numberId);
             return res.status(200).json({
-                plan,
-                message: "Plan deleted successfully",
+                subscription,
+                message: "Subscription deleted successfully",
             });
         } catch (error) {
             res.status(500).json({ message: "Internal server error" });
